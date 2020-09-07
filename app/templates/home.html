@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Tağşiş Kontrol Platformu</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/jquery.slim.min.js') }}"></script>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">
+
+
+    <style>
+        body {
+            background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+        
+        a,
+        a:focus,
+        a:hover {
+            color: #fff;
+        }
+        
+        .mastfoot {
+            color: rgba(255, 255, 255, .5);
+        }
+        
+        #table {
+            background-color: rgba(255, 255, 255, .5);
+            color: black;
+        }
+    </style>
+    <!-- Custom styles for this template -->
+
+</head>
+
+<body class="text-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/">Tağşiş Kontrol Platformu</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Ev
+                      <span class="sr-only">(current)</span>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/map">Haritalar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">İletişim</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="mt-lg-2">
+            <form action="/" method="POST">
+                <div class="input-group mb-3">
+                    <input type="text" id="search" class="form-control" name="searchInput" aria-describedby="basic-addon2" placeholder="Aranacak değeri giriniz...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-borderless table-dark table-hover" id="table">
+                    <thead>
+                        {% if list_of_tagsis %}
+                        <tr>
+                            <th scope="col">
+                                Company Name
+                            </th>
+                            <th scope="col">
+                                Product Name
+                            </th>
+                            <th scope="col">
+                                Brand
+                            </th>
+                            <th scope="col">
+                                Date
+                            </th>
+                            <th scope="col">
+                                Unsuitability
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in list_of_tagsis %}
+                        <tr>
+                            <td>
+                                {{ item['companyName'] }}
+                            </td>
+                            <td>
+                                {{ item['productName'] }}
+                            </td>
+                            <td>
+                                {{ item['brand'] }}
+                            </td>
+                            <td>
+                                {{ item['date'] }}
+                            </td>
+                            <td>
+                                {{ item['unsuitability'] }}
+                            </td>
+                        </tr>
+                        {% endfor %} {% endif %}
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <footer class="mastfoot mt-auto">
+        <div class="copyright text-center ">© 2020 Copyright:
+            <a href="https://github.com/mehmetbarispolat"> Mehmet Barış POLAT</a>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<table class="table table-borderless table-dark table-hover" id="table">
+    <thead>
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Brand
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Unsuitability
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in list_of_tagsis %}
+        <tr>
+            <td>
+                {{ item['companyName'] }}
+            </td>
+            <td>
+                {{ item['productName'] }}
+            </td>
+            <td>
+                {{ item['brand'] }}
+            </td>
+            <td>
+                {{ item['date'] }}
+            </td>
+            <td>
+                {{ item['unsuitability'] }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

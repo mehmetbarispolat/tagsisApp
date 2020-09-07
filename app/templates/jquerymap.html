@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>Tağşiş Haritası</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <link href="{{ url_for('static', filename='dist/jqvmap.css') }}" media="screen" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+
+    <style>
+        body {
+            background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+        
+        a,
+        a:focus,
+        a:hover {
+            color: #fff;
+        }
+        
+        .mastfoot {
+            color: rgba(255, 255, 255, .5);
+        }
+        
+        #table {
+            background-color: rgba(255, 255, 255, .5);
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Tağşiş Kontrol Platformu</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Ev
+                      <span class="sr-only">(current)</span>
+                    </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/map">Haritalar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">İletişim</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <div id="vmap" style="width: 80%; height: 500px; left:100px; bottom:15px;"></div>
+        <h6 id="name" style="text-align: center;"></h6>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="response" class="col-lg-12">
+
+            </div>
+        </div>
+    </div>
+    <footer class="mastfoot mt-auto">
+        <div class="copyright text-center py-3">© 2020 Copyright:
+            <a href="https://github.com/mehmetbarispolat"> Mehmet Barış POLAT</a>
+        </div>
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='dist/jquery.vmap.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='dist/maps/jquery.vmap.turkey.js') }}" charset="utf-8"></script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('#vmap').vectorMap({
+                map: 'turkey',
+                backgroundColor: "url('https: //source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed",
+                onRegionClick: function(element, code, region) {
+                    //$('#name').html(region + " Plaka kodu:" + code);
+                    $("div#response").empty();
+                    $.ajax({
+                        url: '/getMap/' + region,
+                        type: 'POST',
+                        success: function(resp) {
+                            $('div#response').append(resp.data)
+                        }
+                    })
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
