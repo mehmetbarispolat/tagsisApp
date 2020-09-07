@@ -5,7 +5,7 @@ from firebase_admin import firestore
 
 """ GLOBAL VARIABLE """
 #------------------------------------------------------------
-SERVICE_KEY_PATH = 'C:/Users/holos/Desktop/tagsisProject/serviceAccountKey.json'
+SERVICE_KEY_PATH = './serviceAccountKey.json'
 #------------------------------------------------------------
 
 """ FIREBASE CONNECT"""
