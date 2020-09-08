@@ -45,8 +45,9 @@ def searchTagsis(searchInput):
     list_of_tagsis = []
     tagsis_ref = db.collection(u'tagsis')
     docs = tagsis_ref.stream()
+    searchInput = searchInput.replace('I','ı')
     for doc in docs:
-        if searchInput.lower() in doc.to_dict()["productName"].lower() or searchInput.lower() in doc.to_dict()["brand"].lower() or searchInput.lower() in doc.to_dict()["companyName"].replace('İ','i').lower():
+        if searchInput.lower() in doc.to_dict()["productName"].lower() or searchInput.lower() in doc.to_dict()["brand"].lower() or searchInput.lower() in doc.to_dict()["companyName"].replace('İ','i').replace('I','ı').lower():
             list_of_tagsis.append(doc.to_dict())
     return list_of_tagsis
 
@@ -54,6 +55,7 @@ def searchRegion(searchInput):
     list_of_region = []
     region_ref = db.collection(u'tagsis')
     docs = region_ref.stream()
+    searchInput = searchInput.replace('ı','I')
     for doc in docs:
         if searchInput.replace('i','İ').upper() in doc.to_dict()["companyName"]:
             list_of_region.append(doc.to_dict())
